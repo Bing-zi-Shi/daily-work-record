@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>结直肠癌筛查工作记录表</title>
+    <style>
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .record-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 15px;
+        }
+        
+        .header h2 {
+            color: #2E7D32;
+            margin: 0;
+            font-size: 24px;
+        }
+        
+        .form-section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            background: #E8F5E8;
+            padding: 10px 15px;
+            border-left: 4px solid #4CAF50;
+            font-weight: bold;
+            color: #2E7D32;
+            margin-bottom: 15px;
+        }
+        
+        .form-row {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .form-label {
+            min-width: 120px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        
+        .form-input:focus {
+            border-color: #4CAF50;
+            outline: none;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin-top: 15px;
+        }
+        
+        .record-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        .record-table th,
+        .record-table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .record-table th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .record-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .record-table tr:hover {
+            background-color: #f0f8f0;
+        }
+        
+        .record-table input {
+            border: none;
+            background: transparent;
+            width: 100%;
+            text-align: center;
+            font-size: 14px;
+        }
+        
+        .record-table input:focus {
+            background: #fff;
+            border: 1px solid #4CAF50;
+            border-radius: 3px;
+        }
+        
+        .textarea-large {
+            width: 100%;
+            min-height: 80px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: vertical;
+            font-family: inherit;
+        }
+        
+        .summary-section {
+            background: #F3E5F5;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #9C27B0;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .summary-item {
+            font-weight: bold;
+            color: #4A148C;
+        }
+        
+        .btn-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        
+        .btn-primary {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #45a049;
+        }
+        
+        .btn-secondary {
+            background-color: #2196F3;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #1976D2;
+        }
+        
+        @media (max-width: 600px) {
+            .form-row {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .form-label {
+                min-width: auto;
+                margin-bottom: 5px;
+            }
+            
+            .summary-row {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="record-container">
+        <div class="header">
+            <h2>结直肠癌筛查工作记录表</h2>
+        </div>
+        
+        <div class="form-section">
+            <div class="section-title">基本信息</div>
+            <div class="form-row">
+                <label class="form-label">记录日期：</label>
+                <input type="date" class="form-input" id="recordDate">
+            </div>
+            <div class="form-row">
+                <label class="form-label">记录人：</label>
+                <input type="text" class="form-input" placeholder="请输入姓名">
+            </div>
+            <div class="form-row">
+                <label class="form-label">工作地点：</label>
+                <input type="text" class="form-input" placeholder="请输入社区卫生服务中心名称">
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <div class="section-title">宣传活动记录</div>
+            <div class="table-container">
+                <table class="record-table">
+                    <thead>
+                        <tr>
+                            <th>时间段</th>
+                            <th>宣传地点</th>
+                            <th>宣传方式</th>
+                            <th>接触人数</th>
+                            <th>发放资料数</th>
+                            <th>备注</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" placeholder="如：9:00-10:00"></td>
+                            <td><input type="text" placeholder="如：社区广场"></td>
+                            <td><input type="text" placeholder="如：发放宣传单"></td>
+                            <td><input type="number" placeholder="人数"></td>
+                            <td><input type="number" placeholder="份数"></td>
+                            <td><input type="text" placeholder="其他说明"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="number"></td>
+                            <td><input type="number"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="number"></td>
+                            <td><input type="number"></td>
+                            <td><input type="text"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <div class="section-title">居民反馈记录</div>
+            <div class="table-container">
+                <table class="record-table">
+                    <thead>
+                        <tr>
+                            <th>居民类型</th>
+                            <th>主要疑问/关切</th>
+                            <th>反馈态度</th>
+                            <th>处理方式</th>
+                            <th>结果</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" placeholder="如：中年女性"></td>
+                            <td><input type="text" placeholder="如：担心检查费用"></td>
+                            <td>
+                                <select style="width: 100%; border: none; background: transparent;">
+                                    <option value="">请选择</option>
+                                    <option value="积极">积极</option>
+                                    <option value="犹豫">犹豫</option>
+                                    <option value="拒绝">拒绝</option>
+                                </select>
+                            </td>
+                            <td><input type="text" placeholder="如：详细解释免费政策"></td>
+                            <td>
+                                <select style="width: 100%; border: none; background: transparent;">
+                                    <option value="">请选择</option>
+                                    <option value="同意参与">同意参与</option>
+                                    <option value="考虑中">考虑中</option>
+                                    <option value="拒绝参与">拒绝参与</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td>
+                                <select style="width: 100%; border: none; background: transparent;">
+                                    <option value="">请选择</option>
+                                    <option value="积极">积极</option>
+                                    <option value="犹豫">犹豫</option>
+                                    <option value="拒绝">拒绝</option>
+                                </select>
+                            </td>
+                            <td><input type="text"></td>
+                            <td>
+                                <select style="width: 100%; border: none; background: transparent;">
+                                    <option value="">请选择</option>
+                                    <option value="同意参与">同意参与</option>
+                                    <option value="考虑中">考虑中</option>
+                                    <option value="拒绝参与">拒绝参与</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td>
+                                <select style="width: 100%; border: none; background: transparent;">
+                                    <option value="">请选择</option>
+                                    <option value="积极">积极</option>
+                                    <option value="犹豫">犹豫</option>
+                                    <option value="拒绝">拒绝</option>
+                                </select>
+                            </td>
+                            <td><input type="text"></td>
+                            <td>
+                                <select style="width: 100%; border: none; background: transparent;">
+                                    <option value="">请选择</option>
+                                    <option value="同意参与">同意参与</option>
+                                    <option value="考虑中">考虑中</option>
+                                    <option value="拒绝参与">拒绝参与</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="form-section">
+            <div class="section-title">遇到的问题及解决方案</div>
+            <textarea class="textarea-large" placeholder="请详细描述工作中遇到的问题、采取的解决措施以及效果..."></textarea>
+        </div>
+        
+        <div class="form-section">
+            <div class="section-title">工作小结</div>
+            <textarea class="textarea-large" placeholder="请总结今日工作成效、经验体会、改进建议等..."></textarea>
+        </div>
+        
+        <div class="summary-section">
+            <div class="section-title" style="background: none; border: none; padding: 0; margin-bottom: 15px; color: #4A148C;">当日统计汇总</div>
+            <div class="summary-row">
+                <span class="summary-item">总接触人数：<input type="number" id="totalPeople" style="width: 60px; margin-left: 10px;"> 人</span>
+                <span class="summary-item">发放宣传资料：<input type="number" id="totalMaterials" style="width: 60px; margin-left: 10px;"> 份</span>
+            </div>
+            <div class="summary-row">
+                <span class="summary-item">积极反馈人数：<input type="number" id="positiveFeedback" style="width: 60px; margin-left: 10px;"> 人</span>
+                <span class="summary-item">同意参与人数：<input type="number" id="agreedPeople" style="width: 60px; margin-left: 10px;"> 人</span>
+            </div>
+        </div>
+        
+        <div class="btn-container">
+            <button class="btn btn-primary" onclick="saveRecord()">保存记录</button>
+            <button class="btn btn-secondary" onclick="printRecord()">打印记录</button>
+        </div>
+    </div>
+    
+    <script>
+        // 设置默认日期为今天
+        document.getElementById('recordDate').value = new Date().toISOString().split('T')[0];
+        
+        function saveRecord() {
+            alert('记录已保存！');
+        }
+        
+        function printRecord() {
+            window.print();
+        }
+        
+        // 自动计算汇总数据
+        function updateSummary() {
+            let totalPeople = 0;
+            let totalMaterials = 0;
+            
+            const peopleInputs = document.querySelectorAll('table tbody tr td:nth-child(4) input');
+            const materialsInputs = document.querySelectorAll('table tbody tr td:nth-child(5) input');
+            
+            peopleInputs.forEach(input => {
+                if (input.value) {
+                    totalPeople += parseInt(input.value) || 0;
+                }
+            });
+            
+            materialsInputs.forEach(input => {
+                if (input.value) {
+                    totalMaterials += parseInt(input.value) || 0;
+                }
+            });
+            
+            document.getElementById('totalPeople').value = totalPeople;
+            document.getElementById('totalMaterials').value = totalMaterials;
+        }
+        
+        // 监听输入变化，自动更新汇总
+        document.addEventListener('input', function(e) {
+            if (e.target.type === 'number') {
+                updateSummary();
+            }
+        });
+    </script>
+</body>
+</html>
